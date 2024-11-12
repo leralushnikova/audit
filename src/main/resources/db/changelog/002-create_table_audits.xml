@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="002-create_table_audits" author="lera">
+
+        <createTable  schemaName="demo" tableName="audits">
+            <column name="id" type="integer" >
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="time" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+        <addDefaultValue  columnName="id"
+                          defaultValueSequenceNext="audits_id_seq"
+                          schemaName="demo"
+                          tableName="audits"/>
+
+        <addForeignKeyConstraint baseTableSchemaName="demo"
+                                 baseColumnNames="user_id"
+                                 baseTableName="audits"
+                                 deleteCascade="true"
+                                 constraintName="fk_audits_user_id"
+                                 referencedTableSchemaName="demo"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+    </changeSet>
+</databaseChangeLog>
