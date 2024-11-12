@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: audit
+  config:
+    import: optional:file:.env
+  datasource:
+    url: ${JDBC_DRIVER_VERSION}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver: org.postgresql.Driver
+  liquibase:
+    change-log: db/changelog/changelog-audit.xml
+    enabled: true
